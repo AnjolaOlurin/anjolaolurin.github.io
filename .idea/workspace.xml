@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e79b886a-7344-4346-800a-56ed3ebbb0ff" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-    </list>
+    <list default="true" id="e79b886a-7344-4346-800a-56ed3ebbb0ff" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -19,7 +17,7 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
+            <state relative-caret-position="371">
               <caret line="348" column="34" lean-forward="true" selection-start-line="348" selection-start-column="34" selection-end-line="348" selection-end-column="34" />
               <folding />
             </state>
@@ -32,6 +30,7 @@
     <findStrings>
       <find>feature_item</find>
       <find>single-brand-item</find>
+      <find>.png</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -113,12 +112,12 @@
       <option name="presentableId" value="Default" />
       <updated>1553469282727</updated>
       <workItem from="1553469294265" duration="3284000" />
-      <workItem from="1553478750707" duration="1783000" />
+      <workItem from="1553478750707" duration="1927000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5067000" />
+    <option name="totallyTimeSpent" value="5211000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -174,9 +173,29 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/img/portfolio/p1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/img/portfolio/p4.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/img/portfolio/p2.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/img/portfolio/p3.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
+        <state relative-caret-position="371">
           <caret line="348" column="34" lean-forward="true" selection-start-line="348" selection-start-column="34" selection-end-line="348" selection-end-column="34" />
           <folding />
         </state>
