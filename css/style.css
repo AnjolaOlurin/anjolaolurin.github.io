@@ -229,7 +229,7 @@ button:focus {
       .header_area .navbar .nav .nav-item .nav-link {
         font: 500 14px/100px "Rubik", sans-serif;
         text-transform: uppercase;
-        color: #000000;
+        color: #ddd;
         padding: 0px;
         display: inline-block; }
         .header_area .navbar .nav .nav-item .nav-link:after {
