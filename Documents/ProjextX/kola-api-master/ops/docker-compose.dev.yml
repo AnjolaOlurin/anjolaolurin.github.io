@@ -1,0 +1,27 @@
+version: "3.7"
+
+volumes:
+  pg_data:
+
+services:
+  postgres:
+    # typeorm sometimes fails with postgres 12
+    # https://github.com/typeorm/typeorm/issues/4332
+    image: postgres:11-alpine
+    volumes:
+      - "pg_data:/var/lib/postgresql/data"
+    restart: always
+    ports:
+      - 127.0.0.1:5431:5432
+    environment:
+      POSTGRES_DB: "kola-db"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+
+  rabbitmq:
+    image: 'rabbitmq:3.8.3-management-alpine'
+    ports:
+      # The standard AMQP protocol port
+      - '127.0.0.1:5672:5672'
+      # HTTP management UI
+      - '127.0.0.1:15672:15672'

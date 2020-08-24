@@ -1,0 +1,117 @@
+references:
+  master_only: &master_only
+    filters:
+      branches:
+        only: master
+  versions_only: &versions_only
+    filters:
+      tags:
+        only: /^v.*/
+      branches:
+        ignore: /.*/
+  not_master_branch: &not_master_branch
+    filters:
+      branches:
+        ignore: master
+
+version: 2.1
+
+orbs:
+  gke: circleci/gcp-gke@1.0.4
+  gcr: circleci/gcp-gcr@0.7.1
+
+executors:
+  node:
+    docker:
+    - image: circleci/node:14
+
+commands:
+  checkout_with_submodules:
+    steps:
+    - run:
+        name: Install local git and ssh client (in alpine only)
+        command: |
+          if which apk; then
+            apk add --no-cache git openssh-client
+          fi
+    - checkout
+    - run: git submodule sync
+    - run: git submodule update --init
+
+  yarn_install:
+    steps:
+    - restore_cache:
+        name: Restore node_modules from cache
+        keys:
+        - v1-dependency-npm-{{ checksum "yarn.lock" }}
+        - v1-dependency-npm
+    - run: yarn --frozen-lockfile
+    - save_cache:
+        name: Save node_modules to cache
+        key: v1-dependency-npm-{{ checksum "yarn.lock" }}
+        paths:
+        - node_modules
+
+jobs:
+  premerge-check:
+    executor: node
+    steps:
+    - checkout_with_submodules
+    - yarn_install
+    - run: yarn lint
+    - run: yarn build
+    - run: yarn test
+
+
+  deploy-stg:
+    description: Deploy Stagging application to Google Kubernetes Engine
+    machine: true
+    steps:
+      - gcr/gcr-auth
+      - gke/install
+      - gke/rollout-image:
+          cluster: kola-cluster
+          container: kola-api
+          namespace: 'stg'
+          deployment: kola-api-dpl
+          image: gcr.io/$GOOGLE_PROJECT_ID/kola-api
+          tag: $CIRCLE_SHA1
+
+  deploy-prod:
+    description: Deploy Prod application to Google Kubernetes Engine
+    machine: true
+    steps:
+      - gcr/gcr-auth
+      - gke/install
+      - gke/rollout-image:
+          cluster: kola-cluster
+          container: kola-api
+          deployment: kola-api-dpl
+          image: gcr.io/$GOOGLE_PROJECT_ID/kola-api
+          tag: $CIRCLE_SHA1
+
+workflows:
+  deploy-stg-approve-prod:
+    jobs:
+      - gcr/build-and-push-image:
+          <<: *master_only
+          image: kola-api
+          tag: $CIRCLE_SHA1
+      - deploy-stg:
+          <<: *master_only
+          requires:
+            - gcr/build-and-push-image
+      - approve-deploy-prod:
+          <<: *master_only
+          type: approval
+          requires:
+          - deploy-stg
+      - deploy-prod:
+          <<: *master_only
+          requires:
+          - approve-deploy-prod
+
+  premerge-check:
+    jobs:
+      - premerge-check:
+          <<: *not_master_branch

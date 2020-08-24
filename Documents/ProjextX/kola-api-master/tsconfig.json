@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+      "module": "commonjs",
+      "declaration": false,
+      "noImplicitAny": false,
+      "removeComments": true,
+      "noLib": false,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "resolveJsonModule": true,
+      "target": "es6",
+      "sourceMap": false,
+      "allowJs": true,
+      "outDir": "./dist",
+      "baseUrl": "./",
+      "paths": {
+        "@api/*": ["./src/api/*"],
+        "@core/*": ["./src/core/*"],
+        "@auth/*": ["./src/auth/*"],
+        "@common/*": ["./src/common/*"],
+        "@config/*": ["./src/config/*"]
+      },
+      "incremental": true
+    },
+    "include": [
+      "src/**/*", "src/migrations/1593493532903-CreateBasicReports.ts"
+    ],
+    "exclude": ["node_modules", "dist"]
+  }
